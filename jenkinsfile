@@ -1,31 +1,21 @@
 pipeline {
     agent any
-
-    tools {
-        // Install the Maven version configured as "M3" and add it to the path.
-        maven "Maven"
-    }
-
     stages {
-        stage('Gitcheckout') {
+        stage('checkout') {
             steps {
-              git credentialsId: 'git_cred', url: 'https://github.com/Meenakshi0812/meenudevops.git' 
+              echo 'Hello Venu' 
             }
         }
         stage('build') {
             steps {
-              bat 'mvn clean install'
+              echo 'Hi Gopal'
             }
         }
-        stage('codeQuality') {
+        stage('Deploy') {
             steps {
-               bat 'mvn sonar:sonar'             
+               echo 'Hi VenuGopal'             
             }
         }
-        stage('deploy') {
-            steps {
-             deploy adapters: [tomcat8(credentialsId: 'Tomcat_cred', path: '', url: 'http://localhost:7000/')], contextPath: 'webAppExample', war: '**/*.war'
-            }
+                    
         }
-    }
 }
